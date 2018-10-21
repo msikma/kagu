@@ -1,0 +1,50 @@
+{
+  "name": "kagu",
+  "version": "1.0.0",
+  "description": "Monorepo container for the Kagu project",
+  "private": true,
+  "homepage": "https://github.com/msikma/kagu",
+  "author": "Michiel Sikma <michiel@sikma.org>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ],
+  "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/scripts/",
+      ".*/lib/"
+    ],
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "verbose": true
+  },
+  "scripts": {
+    "start": "node ./packages/kagu-backend/bin/run.js",
+    "build": "babel --config-file ./babel.config.js --verbose --relative ./packages/**/src/ -d ../lib",
+    "watch": "babel --watch --config-file ./babel.config.js --verbose --relative ./packages/**/src/ -d ../lib",
+    "lint": "eslint ./packages/**/src",
+    "test": "jest ./packages/**/src",
+    "test-watch": "jest --watch ./packages/**/src",
+    "lint-new": "eslint `git diff --name-only develop | grep -i \".js$\"`; exit 0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.0.0-beta.47",
+    "@babel/core": "7.0.0-beta.47",
+    "@babel/node": "7.0.0-beta.47",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "7.0.0-beta.47",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.6.0",
+    "eslint": "^4.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^5.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "regenerator-runtime": "^0.12.0"
+  }
+}
